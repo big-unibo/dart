@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1' }
+}
+
+shadowJar{ zip64=true }
+
+repositories {
+    maven { url "http://download.osgeo.org/webdav/geotools" }
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repository.cloudera.com/artifactory/cloudera-repos/" }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.12'
+    compile 'org.scala-lang:scala-reflect:2.11.12'
+    compile 'org.scala-lang:scala-compiler:2.11.12'
+    compile 'org.apache.spark:spark-core_2.11:2.4.0-cdh6.2.0'
+    compile 'org.apache.spark:spark-sql_2.11:2.4.0-cdh6.2.0'
+    compile 'org.apache.spark:spark-hive_2.11:2.4.0-cdh6.2.0'
+    compile 'org.apache.spark:spark-mllib_2.11:2.4.0-cdh6.2.0'
+    compile 'org.datasyslab:geospark:1.2.0'
+    compile 'org.datasyslab:geospark-sql_2.3:1.2.0'
+    compile 'org.datasyslab:geospark-viz_2.3:1.2.0'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.geotools:gt-main:19.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: '3.0.5'
+}
+
+defaultTasks 'clean', 'build', 'check', 'javadoc', 'jar'
