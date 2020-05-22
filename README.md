@@ -1,6 +1,6 @@
 # DART: De-Anonymization of Personal Gazetteers through Social Trajectories
 
-![Build](https://travis-ci.org/big-unibo/dart.svg?branch=master)
+![build passing](https://travis-ci.org/big-unibo/dart.svg?branch=master)
 
 The interest towards trajectory data has sensibly increased 
 since the widespread of mobile devices. Simple clustering 
